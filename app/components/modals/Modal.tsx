@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { IoMdClose } from 'react-icons/io'
 import Button from "../Button";
 
@@ -17,7 +17,7 @@ interface ModalProps {
   secondaryActionLabel?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({
+const Modal: React.FC<ModalProps> = memo(({
   isOpen,
   onClose,
   onSubmit,
@@ -31,18 +31,14 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
   const [showModal, setShowModal] = useState(isOpen)
 
-  useEffect(() => {
-    setShowModal(isOpen)
-  }, [isOpen])
+  useEffect(() => setShowModal(isOpen), [isOpen])
 
   const handleClose = useCallback(() => {
     if (disabled) return;
 
     setShowModal(false)
-    setTimeout(() => {
-      onClose()
-    }, 300)
-  }, [disabled, onClose])
+    setTimeout(() => onClose(), 300)
+  }, [onClose, disabled])
 
   const handleSubmit = useCallback(() => {
     if (disabled) return;
@@ -54,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({
     secondaryAction()
   }, [disabled, secondaryAction])
 
-  if (!isOpen) null
+  if (!isOpen) return null
 
   return (
     <div
@@ -102,12 +98,14 @@ const Modal: React.FC<ModalProps> = ({
                   onClick={handleSubmit}
                 />
               </div>
+
+              {footer}
             </div>
           </div>
         </div>
       </div>
     </div>
   )
-}
+})
 
 export default Modal
