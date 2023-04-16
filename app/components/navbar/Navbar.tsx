@@ -1,14 +1,14 @@
 'use client'
 
 import { memo } from 'react'
-import { User } from '@prisma/client'
 import Container from '../Container'
 import Logo from '../logo/Logo'
 import Search from '../search/Search'
 import UserMenu from '../userMenu/UserMenu'
+import { SafeUser } from '@/app/types'
 
 interface NavbarProps {
-  currentUser: User | null
+  currentUser: SafeUser | null
 }
 
 const Navbar: React.FC<NavbarProps> = memo(({ currentUser }) => {
