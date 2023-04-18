@@ -4,7 +4,7 @@ import axios from 'axios'
 import { memo } from "react"
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import {
   FieldValues,
   SubmitHandler,
@@ -16,6 +16,7 @@ import Heading from '../Heading'
 import Input from '../inputs/Input'
 import { toast } from 'react-hot-toast'
 import Button from '../Button'
+import { signIn } from 'next-auth/react'
 
 const RegisterModal = memo(() => {
   const registerModal = useRegisterModal()
@@ -90,14 +91,14 @@ const RegisterModal = memo(() => {
         outline
         label='Continue with Google registration'
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn('google')}
       />
 
       <Button 
         outline
         label='Continue with GitHub registration'
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn('github')}
       />
 
       <div className='text-neutral-500 text-center mt-4 font-light'>
