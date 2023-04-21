@@ -1,8 +1,7 @@
 'use client'
 
-import axios from 'axios'
 import { signIn } from 'next-auth/react'
-import { memo } from "react"
+import { memo, useCallback } from "react"
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import { useState } from 'react'
@@ -59,6 +58,11 @@ const LoginModal = memo(() => {
       })
   }
 
+  const toggle = useCallback(() => {
+    loginModal.onClose()
+    registerModal.onOpen()
+  }, [loginModal, registerModal])
+
   const bodyContent = (
     <div className='flex flex-col gap-4'>
       <Heading 
@@ -107,15 +111,15 @@ const LoginModal = memo(() => {
       />
 
       <div className='text-neutral-500 text-center mt-4 font-light'>
-        <div className='flex justify-normal flex-row items-center gap-2'>
+        <div className='flex justify-center flex-row items-center gap-2'>
           <div>
-            Already have an account?
+            First time using Airbnb?
           </div>
           <div 
             className='cursor-pointer text-neutral-800 hover:underline'
-            onClick={loginModal.onClose}
+            onClick={toggle}
           >
-            Log In
+            Create an account
           </div>
         </div>
       </div>

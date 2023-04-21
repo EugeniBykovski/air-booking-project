@@ -1,7 +1,7 @@
 'use client'
 
 import axios from 'axios'
-import { memo } from "react"
+import { memo, useCallback } from "react"
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import { useState } from 'react'
@@ -17,9 +17,11 @@ import Input from '../inputs/Input'
 import { toast } from 'react-hot-toast'
 import Button from '../Button'
 import { signIn } from 'next-auth/react'
+import useLoginModal from '@/app/hooks/useLoginModal'
 
 const RegisterModal = memo(() => {
   const registerModal = useRegisterModal()
+  const loginModal = useLoginModal()
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -41,9 +43,14 @@ const RegisterModal = memo(() => {
 
     axios.post('/api/register', data)
       .then(() => registerModal.onClose())
-      .catch(error => toast.error('Something Went Wrong!'))
+      .catch(error => toast.error('Something Went Wrong:', error))
       .finally(() => setIsLoading(false))
   }
+
+  const toggle = useCallback(() => {
+    registerModal.onClose()
+    loginModal.onOpen()
+  }, [loginModal, registerModal])
 
   const bodyContent = (
     <div className='flex flex-col gap-4'>
@@ -102,13 +109,13 @@ const RegisterModal = memo(() => {
       />
 
       <div className='text-neutral-500 text-center mt-4 font-light'>
-        <div className='flex justify-normal flex-row items-center gap-2'>
+        <div className='flex justify-center flex-row items-center gap-2'>
           <div>
             Already have an account?
           </div>
           <div 
             className='cursor-pointer text-neutral-800 hover:underline'
-            onClick={registerModal.onClose}
+            onClick={toggle}
           >
             Log In
           </div>

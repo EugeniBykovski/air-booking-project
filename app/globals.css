@@ -18,3 +18,10 @@ body,
   background-color: #ee57bb;
   border-radius: 9em;
 }
+
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  z-index: 0 !important;
+}
