@@ -194,7 +194,7 @@ const RentModal = memo(() => {
     bodyContent = (
       <div className='flex flex-col gap-8'>
         <Heading 
-          title='How would you describe your plaec?'
+          title='How would you describe your place?'
           subtitle='Show and sweet works best!'
         />
         <Input 

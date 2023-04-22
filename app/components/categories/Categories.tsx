@@ -101,13 +101,12 @@ const Categories = memo(() => {
   return (
     <Container>
       <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
-        {categories.map(category => (
+        {categories.map(item => (
           <CategoryBox 
-            key={category.label} 
-            label={category.label} 
-            // @ts-ignore
-            selected={category === category.label}
-            icon={category.icon}
+            key={item.label} 
+            label={item.label} 
+            selected={category === item.label}
+            icon={item.icon}
           />
         ))}
       </div>
