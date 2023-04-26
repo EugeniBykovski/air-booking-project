@@ -3,10 +3,10 @@
 import { memo } from 'react'
 import Container from '../Container'
 import Logo from '../logo/Logo'
-import Search from '../search/Search'
 import UserMenu from '../userMenu/UserMenu'
 import { SafeUser } from '@/app/types'
 import Categories from '../categories/Categories'
+import Search from '../search/Search'
 
 interface NavbarProps {
   currentUser: SafeUser | null
