@@ -66,7 +66,7 @@ const UserMenu: React.FC<UserMenuProps> = memo(({ currentUser }) => {
                   label="My reservations"
                 />
                 <MenuItem 
-                  onClick={() => {}}
+                  onClick={() => router.push('/properties')}
                   label="My properties"
                 />
                 <MenuItem 
